@@ -163,7 +163,6 @@ image=centos8 tox --parallel all
 ## See Also
 
 * **[Configuration File Format](https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format)**: A complete listing of the available configuration settings for `automatic.conf`.
-* **[Infrastructure Testing with Molecule](Infrastructure Testing with Molecule)**: An introductory video for Molecule. This is a great (slightly dated) primer if you've never used it before.
 
 ## License
 

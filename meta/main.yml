@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: dnf_automatic
   author: Justin Smith
   description: Installs and configures dnf-automatic.
   license: Apache License, 2.0
