@@ -13,6 +13,11 @@ stages:
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: "/certs"
   script: image=$IMAGE tox --parallel all
+
+molecule_centos8:
+  extends: .job_molecule_tests
+  variables:
+    IMAGE: centos8
   rules:
     - changes:
       - .gitlab-ci.yml
@@ -26,17 +31,36 @@ stages:
       - tox-requirements.txt
       - vars/*
 
-molecule_centos8:
-  extends: .job_molecule_tests
-  variables:
-    IMAGE: centos8
-
 molecule_fedora30:
   extends: .job_molecule_tests
   variables:
     IMAGE: fedora30
+  rules:
+    - changes:
+      - .gitlab-ci.yml
+      - defaults/*
+      - handlers/*
+      - molecule/**/*.yml
+      - molecule/**/*.py
+      - tasks/*
+      - templates/*
+      - tox.ini
+      - tox-requirements.txt
+      - vars/*
 
 molecule_fedora31:
   extends: .job_molecule_tests
   variables:
     IMAGE: fedora31
+  rules:
+    - changes:
+      - .gitlab-ci.yml
+      - defaults/*
+      - handlers/*
+      - molecule/**/*.yml
+      - molecule/**/*.py
+      - tasks/*
+      - templates/*
+      - tox.ini
+      - tox-requirements.txt
+      - vars/*

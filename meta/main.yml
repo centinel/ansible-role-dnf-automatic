@@ -10,11 +10,11 @@ galaxy_info:
   platforms:
   - name: Fedora
     versions:
-    - 30
-    - 31
+      - 30
+      - 31
   - name: EL
     versions:
-    - 8
+      - 8
 
   galaxy_tags:
     - dnf

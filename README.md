@@ -2,7 +2,6 @@
 
 ![License](https://img.shields.io/github/license/centinel/ansible-role-dnf-automatic) ![Build Status](https://img.shields.io/gitlab/pipeline/centinel-foss/ansible-role-dnf-automatic/master)
 
-This [Docker](https://www.docker.com) project is a [Dockerfile](https://docs.docker.com/engine/reference/builder/) that can build a Docker container based on the latest version of [Alpine Linux](https://www.alpinelinux.org/). 
 This [Ansible](https://www.ansible.com) project is a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) that can manage [dnf-automatic](https://dnf.readthedocs.io/en/latest/automatic.html), an automatic update management tool for Red Hat-based Linux distributions.
 
 ## Requirements
@@ -18,7 +17,7 @@ The role has been tested on the Ansible versions listed below.
 
 * 2.8
 * 2.9
-* devel (the next version of Ansible)
+* devel (the upcoming version of Ansible)
 
 ## Installation
 
