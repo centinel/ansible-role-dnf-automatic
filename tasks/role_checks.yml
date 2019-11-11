@@ -1,0 +1,7 @@
+---
+- name: Fail if this role is executed on a host that runs an unsupported OS
+  fail:
+    msg: "Unsupported OS. See this role's README file for a list of supported distributions."
+  when: (ansible_os_family != "RedHat") or
+        ((ansible_distribution == "CentOS" or ansible_distribution == "Red Hat Enterprise Linux")
+          and ansible_distribution_major_version|int <= 7)

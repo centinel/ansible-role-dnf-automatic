@@ -1,0 +1,43 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: "dnf_automatic-${distro:-centos}${version:-8}-${TOX_ENVNAME}"
+    image: "${namespace:-geerlingguy}/docker-${distro:-centos8}-ansible:${tag:-latest}"
+    command: /sbin/init
+    pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../resources/converge-default.yml
+scenario:
+  name: default
+  create_sequence:
+    - create
+  test_sequence:
+    - lint
+    - syntax
+    - destroy
+    - create
+    - converge
+    - idempotence
+    - verify
+    - destroy
+  destroy_sequence:
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

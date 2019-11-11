@@ -1,0 +1,42 @@
+---
+stages:
+  - test
+
+.job_molecule_tests:
+  stage: test
+  tags:
+    - docker
+  image: registry.gitlab.com/centinel-foss/docker-alpine-ansible:latest
+  services:
+    - docker:19.03-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
+  script: image=$IMAGE tox --parallel all
+  rules:
+    - changes:
+      - .gitlab-ci.yml
+      - defaults/*
+      - handlers/*
+      - molecule/**/*.yml
+      - molecule/**/*.py
+      - tasks/*
+      - templates/*
+      - tox.ini
+      - tox-requirements.txt
+      - vars/*
+
+molecule_centos8:
+  extends: .job_molecule_tests
+  variables:
+    IMAGE: centos8
+
+molecule_fedora30:
+  extends: .job_molecule_tests
+  variables:
+    IMAGE: fedora30
+
+molecule_fedora31:
+  extends: .job_molecule_tests
+  variables:
+    IMAGE: fedora31

@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Justin Smith
+  description: Installs and configures dnf-automatic.
+  license: Apache License, 2.0
+
+  min_ansible_version: 2.8
+  platforms:
+  - name: Fedora
+    versions:
+    - 30
+    - 31
+  - name: EL
+    versions:
+    - 8
+
+  galaxy_tags:
+    - dnf
+    - security
+    - updates
+dependencies: []

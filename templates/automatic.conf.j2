@@ -1,0 +1,13 @@
+{{ ansible_managed | comment }}
+
+{% for section in dnf_automatic_config_settings %}
+[{{ section }}]
+{% for setting, value in dnf_automatic_config_settings[section].items() %}
+{% if setting == "command_format" or setting == "stdin_format" %}
+{{ setting }} = "{{ value }}"
+{% else %}
+{{ setting }} = {{ value }}
+{% endif %}
+{% endfor %}
+
+{% endfor %}

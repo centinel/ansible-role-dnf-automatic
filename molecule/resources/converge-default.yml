@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    dnf_automatic_manage: true
+  roles:
+    - role: ansible-role-dnf-automatic

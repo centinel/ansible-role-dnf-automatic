@@ -1,0 +1,37 @@
+---
+# Install Settings
+# ================
+dnf_automatic_manage: false
+
+# Config Settings
+# ===============
+dnf_automatic_template: "automatic.conf.j2"
+dnf_automatic_config_settings:
+  commands:
+    apply_updates: false
+    download_updates: false
+    upgrade_type: "default"
+    random_sleep: "0"
+  emitters:
+    emit_via: "stdio"
+    system_name: "{{ ansible_fqdn }}"
+  command:
+    command_format: "cat"
+    stdin_format: "{body}"
+  command_email:
+    command_format: "mail -s {subject} -r {email_from} {email_to}"
+    stdin_format: "{body}"
+    email_from: "root"
+    email_to: "root"
+  email:
+    email_from: "root"
+    email_to: "root"
+    email_host: "localhost"
+  base:
+    plugins: false
+
+# Service Settings
+# ================
+dnf_automatic_timer: "dnf-automatic.timer"
+dnf_automatic_timer_state: "started"
+dnf_automatic_timer_enabled: true

@@ -1,0 +1,63 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: centos-8-${TOX_ENVNAME}
+    image: geerlingguy/docker-centos8-ansible
+    command: /sbin/init
+    pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora-30-${TOX_ENVNAME}
+    image: geerlingguy/docker-fedora30-ansible
+    command: /sbin/init
+    pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora-31-${TOX_ENVNAME}
+    image: geerlingguy/docker-fedora31-ansible
+    command: /sbin/init
+    pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../resources/converge-default.yml
+scenario:
+  name: all
+  create_sequence:
+    - create
+  test_sequence:
+    - lint
+    - syntax
+    - destroy
+    - create
+    - converge
+    - idempotence
+    - verify
+    - destroy
+  destroy_sequence:
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
